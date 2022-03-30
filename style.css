@@ -82,7 +82,7 @@ h2{
  
 }
 .bx-message-rounded-x{
-    margin-left: 3%;
+    margin-left: 15%;
    position: absolute;
 }
 .bx-message-rounded-x:hover{
@@ -90,7 +90,7 @@ h2{
 }
 .tache{
    position: relative;
-    border: 2px solid firebrick;
+    /* border: 2px solid firebrick; */
    display: none;
  padding: auto;
  
@@ -116,7 +116,7 @@ i{
 }
 .bx-chevrons-right{
     flex: 0.5;
-  
+  background-color: brown;
    position: relative;
 }
 .bx-chevrons-left{
@@ -137,9 +137,24 @@ h5{
     text-align: center;
    
 }
-.content{
+.couche{
+    /* background-color: brown; */
     display: none;
-    position: fixed;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+}
+.content{
+    position: relative;
+    top: 25%;
+    left: 38%;
+    /* background-color: brown; */
+    /* display: none; */
+    /* position: fixed; */
     /* border: 2px solid red; */
     width: 25%;
     /* background-color: beige; */
@@ -189,6 +204,23 @@ label{
 }
 .notes{
     border: 2px solid blue;
+    width: 90%;
     flex: 9;
 }
+.date{
+   
+}
+.heure-Depart{
+   
+    display: flex;
+   
 
+}
+.heure-fin{
+   
+    display: flex;
+    
+}
+.clossfleche{
+    visibility: hidden;
+}

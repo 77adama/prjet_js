@@ -2,6 +2,8 @@ const container =document.querySelector('.container')
 const ajoutColonne=document.getElementById('ajout-colonne')
 const ajoutNnote=document.getElementById('ajout-note')
 const content =document.querySelector('.content')
+const couche=document.querySelector('.couche')
+
 
 var tab=['#406cc3','#2cb860','#daa520','#adff2f','#ff2a8a']
 let k=0
@@ -23,7 +25,7 @@ function ajouter(){
     // para.appendChild(icone1)
     para.appendChild(span)
     // para.appendChild(icone2)
-    h2.appendChild(deletColonne)    
+   div.appendChild(deletColonne)    
     div.appendChild(h2)
     div.appendChild(para)
     // div.appendChild(image)
@@ -47,76 +49,17 @@ function ajouter(){
 //     })
 
 
-    h2.addEventListener('click', function(){
+deletColonne.addEventListener('click', function(){
         
         var parent =this.parentElement.parentElement;
         parent.removeChild(div);
-        // reflesh()
+        reflesh()
     })
-
-// iconeRight.addEventListener('click', ()=>{
-//         trans[+1].appendChild(paraNote) 
-//          if ( trans[+1].appendChild(paraNote) ) {
-//             iconeRight.addEventListener('click', ()=>{
-//             trans[+2].appendChild(paraNote) 
-//             if ( trans[+2].appendChild(paraNote) ) {
-//                 iconeRight.addEventListener('click', ()=>{
-//             trans[+3].appendChild(paraNote) 
-//             if ( trans[+3].appendChild(paraNote) ) {
-//                 iconeRight.addEventListener('click', ()=>{
-//             trans[+4].appendChild(paraNote) 
-
-//                       })
-//                  }
-
-//                 })
-//             }
-
-//         })
-//      }  
-// })
-// l=0
-// const iconeLeft=document.querySelector('.bx-chevrons-left')
-// const paraNoteLeft=document.querySelector('.tache')
-// iconeLeft.addEventListener('click', ()=>{
-//     console.log(l);
-//     trans[l].appendChild(paraNoteLeft) 
-//     if ( trans[+3].appendChild(paraNoteLeft) ) {
-//        iconeLeft.addEventListener('click', ()=>{
-//        trans[+2].appendChild(paraNoteLeft) 
-//        if ( trans[+2].appendChild(paraNoteLeft) ) {
-//            iconeLeft.addEventListener('click', ()=>{
-//        trans[+1].appendChild(paraNoteLeft) 
-//        if ( trans[+1].appendChild(paraNoteLeft) ) {
-//            iconeLeft.addEventListener('click', ()=>{
-//        trans[+0].appendChild(paraNoteLeft) 
-
-//                  })
-//             }
-
-//            })
-//        }
-
-//    })
-// } 
-//     l--    
-// })     
 }
-// l=0
-// const trans=document.querySelectorAll('.article')
-// function update() {
-//     l++
-//     // Update Active class in circle
-//     trans.forEach((circle, index) => {
-//         if(index <l){
-//             circle.appendChild(paraNote)
-//         }
-        
-//     })
-// }
 
 
 ajoutColonne.addEventListener('click', ()=>{
+   
 ajoutNnote.classList.add('ajout-note')
 
     console.log( ajoutNnote);
@@ -125,19 +68,22 @@ ajoutNnote.classList.add('ajout-note')
 
 let i=0
 ajoutColonne.addEventListener('click', ()=>{
-   
+    reflesh()
     if(i<5){
         ajouter()
         k++
     }
+    
     i++   
+   
+
 })
 
 
 
 let j=0
 ajoutNnote.addEventListener('click',()=>{
-    
+    m++
     if(j<1){
     const divTitre=document.createElement('div')
     divTitre.setAttribute('class', 'titre')
@@ -199,9 +145,10 @@ const buttonFormm=document.getElementById('btn-form')
 const valueTimeStar=document.getElementById('time-star')
 const valueDate=document.getElementById('date')
 const valueTimeEnd=document.getElementById('time-end')
-
-
+m=0
 buttonFormm.addEventListener('click',()=>{
+    reflesh()
+    couche.classList.remove('open')
     paraNote.classList.add('visible')
     const spanNote=document.createElement('h4')
     var notes = document.createElement('div')
@@ -220,8 +167,8 @@ buttonFormm.addEventListener('click',()=>{
     heureFin.setAttribute('class', 'heure-fin')
     champTextarea.innerHTML=valueTextarea.value 
     date.innerHTML=valueDate.value
-    heureDepart.innerHTML= 'heure de départest:'+ valueTimeStar.value
-    heureFin.innerHTML=valueTimeEnd.value
+    heureDepart.innerHTML= 'heure départ:'+ valueTimeStar.value
+    heureFin.innerHTML= 'heure de fin : '+ valueTimeEnd.value
     // spanNote.appendChild(iconeLeft)
     notes.appendChild(champTextarea)
     notes.appendChild(date)
@@ -232,34 +179,66 @@ buttonFormm.addEventListener('click',()=>{
    spanNote.appendChild(icone1)
     paraNote.appendChild(spanNote)
 
-    const trans=document.querySelectorAll('.article')
-    const iconeRight=document.querySelector('.bx-chevrons-right')
+    var trans=document.querySelectorAll('.article')
+   var iconeRight=document.querySelector('.bx-chevrons-right')
     var m = 0;
-    iconeRight.addEventListener('click',()=>{
-      m++
-      trans[m].appendChild(spanNote)
-    })
+        iconeRight.addEventListener('click',()=>{
+            trans[m].appendChild(spanNote)
+          m++     
+        })
     const iconeLeft=document.querySelector('.bx-chevrons-left')
     iconeLeft.addEventListener('click',()=>{
       m--
       trans[m].appendChild(spanNote)
     })
-
-    
-
+   
 })
+
 
     }
     j++
-content.classList.add('open')
+couche.classList.add('open')
 
 const closse=document.querySelector('.titre')   
  closse.addEventListener('click',()=>{
-     content.classList.remove('open')
+    //  content.classList.remove('open')
  })
 
-
-      
+     
 
 })
+function reflesh(){
+    const refleshColonne=document.querySelectorAll('h2');
+            refleshColonne.forEach((h2, i)=>{
+                h2.innerHTML='colonne' +(i+1)
+            })
+}
 
+function affMas(){
+    if(p==-nbr+1)
+    gEL.style.visibility="hidden"
+    else
+    gEL.style.visibility="visible"
+    if(p==0)
+    dEL.style.visibility="hidden"
+    else
+    dEL.style.visibility="visible"
+}
+// function affMas(){
+//     if(p==-nbr+1)
+//     gEL.style.visibility="hidden"
+//     else
+//     gEL.style.visibility="visible"
+//     if(p==0)
+//     dEL.style.visibility="hidden"
+//     else
+//     dEL.style.visibility="visible"
+// }
+// }
+
+// function reflesh(){
+//     const listLabel=document.querySelectorAll('.repons');
+//     listLabel.forEach((label, i)=>{
+//         label.innerHTML='reponse' +(i+1)
+//     })
+//   }
