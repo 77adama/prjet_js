@@ -3,18 +3,21 @@ const ajoutColonne=document.getElementById('ajout-colonne')
 const ajoutNnote=document.getElementById('ajout-note')
 const content =document.querySelector('.content')
 const couche=document.querySelector('.couche')
-
-
+var m=0
+var i=0
 var tab=['#406cc3','#2cb860','#daa520','#adff2f','#ff2a8a']
 let k=0
 function ajouter(){
+  
     const div=document.createElement('div')
     div.setAttribute('class', 'article')
-    div.setAttribute('id', 'id1')
+    div.setAttribute('id', 'id'+i)
+    const divHDelete=document.createElement('div')
+    divHDelete.setAttribute('id', 'h-delete')
     const h2=document.createElement('h2')
     h2.innerHTML='colonne '+(k+1)
     const deletColonne=document.createElement('i')
-    deletColonne.setAttribute('class','bx bx-message-rounded-x')
+    deletColonne.setAttribute('class','bx bx-x') 
     const para=document.createElement('div')
     para.setAttribute('class','tache')
     const span=document.createElement('h4')
@@ -25,17 +28,19 @@ function ajouter(){
     // para.appendChild(icone1)
     para.appendChild(span)
     // para.appendChild(icone2)
-   div.appendChild(deletColonne)    
-    div.appendChild(h2)
+    divHDelete.appendChild(h2)
+   divHDelete.appendChild(deletColonne)    
+    div.appendChild(divHDelete)
     div.appendChild(para)
     // div.appendChild(image)
     container.appendChild(div)
         // span[3].style.display='none'
        div.style.backgroundColor=tab[k]
 
-       const iconeRight=document.querySelector('.bx-chevrons-right')
-       const paraNote=document.querySelector('.tache')
-       const trans=document.querySelectorAll('.article')
+       
+     h2.addEventListener('click', ()=>{
+         divHDelete.innerHTML='<input type="text" id="renommer">'
+     })
 
 // var m = 0;
 //     iconeRight.addEventListener('click',()=>{
@@ -49,41 +54,74 @@ function ajouter(){
 //     })
 
 
-deletColonne.addEventListener('click', function(){
+
+
+// if(i>0){deletColonne.addEventListener('click', function(){
+     
+//     var parent =this.parentElement.parentElement;
+//     parent.removeChild(div);
+//     reflesh()
+// })
+
+// }else{deletColonne.addEventListener('click', function(){
+     
+//     var parent =this.parentElement.parentElement;
+//     parent.removeChild(div);
+//     reflesh()
+// })} }
+const containerConfirme =document.querySelector('.container-confirme')
+deletColonne.addEventListener('click', ()=>{
+        containerConfirme.classList.add('affiche-sms-confirme')
+})
+const annuler=document.getElementById('annuler')
+annuler.addEventListener('click',()=>{
+    containerConfirme.classList.remove('affiche-sms-confirme')
+})
+const confirmer=document.getElementById('confirmer')
+const divRemove=document.querySelectorAll('#id'+i)
+const bxBXx=document.querySelectorAll('.bx bx-x')
+confirmer.addEventListener('click',()=>{
+    containerConfirme.classList.remove('affiche-sms-confirme')
+ div.remove(+i+1)
+})
+
+
+// deletColonne.addEventListener('click', function(){
+//     i--
+//     reflesh()
+//     i--
+//         var parent =this.parentElement.parentElement.parentElement;
+//         i--
+//         parent.removeChild(div);
         
-        var parent =this.parentElement.parentElement;
-        parent.removeChild(div);
-        reflesh()
-    })
+//         reflesh()
+//     })
+    
 }
 
 
 ajoutColonne.addEventListener('click', ()=>{
-   
 ajoutNnote.classList.add('ajout-note')
 
     console.log( ajoutNnote);
 })  
 
 
-let i=0
+// var i=0
 ajoutColonne.addEventListener('click', ()=>{
-    reflesh()
+    
     if(i<5){
         ajouter()
-        k++
-    }
-    
-    i++   
-   
-
-})
+        k++   
+    } 
+    i++           
+     })
 
 
 
 let j=0
 ajoutNnote.addEventListener('click',()=>{
-    m++
+   
     if(j<1){
     const divTitre=document.createElement('div')
     divTitre.setAttribute('class', 'titre')
@@ -145,18 +183,20 @@ const buttonFormm=document.getElementById('btn-form')
 const valueTimeStar=document.getElementById('time-star')
 const valueDate=document.getElementById('date')
 const valueTimeEnd=document.getElementById('time-end')
-m=0
+
 buttonFormm.addEventListener('click',()=>{
-    reflesh()
+  
     couche.classList.remove('open')
     paraNote.classList.add('visible')
     const spanNote=document.createElement('h4')
+    spanNote.setAttribute('id', 'id')
     var notes = document.createElement('div')
     notes.setAttribute('class', 'notes')
     const icone1 = document.createElement('i')
     icone1.setAttribute('class','bx bx-chevrons-right') 
     const icone2 = document.createElement('i')
     icone2.setAttribute('class','bx bx-chevrons-left')
+    icone2.setAttribute('id', 'icone-righ')
     var champTextarea = document.createElement('div')
     champTextarea.setAttribute('class', 'champ-textarea')
     var date = document.createElement('div')
@@ -167,8 +207,8 @@ buttonFormm.addEventListener('click',()=>{
     heureFin.setAttribute('class', 'heure-fin')
     champTextarea.innerHTML=valueTextarea.value 
     date.innerHTML=valueDate.value
-    heureDepart.innerHTML= 'heure départ:'+ valueTimeStar.value
-    heureFin.innerHTML= 'heure de fin : '+ valueTimeEnd.value
+    heureDepart.innerHTML= 'heure départ'+ valueTimeStar.value
+    heureFin.innerHTML= 'heure fin'+ valueTimeEnd.value
     // spanNote.appendChild(iconeLeft)
     notes.appendChild(champTextarea)
     notes.appendChild(date)
@@ -179,19 +219,58 @@ buttonFormm.addEventListener('click',()=>{
    spanNote.appendChild(icone1)
     paraNote.appendChild(spanNote)
 
-    var trans=document.querySelectorAll('.article')
-   var iconeRight=document.querySelector('.bx-chevrons-right')
-    var m = 0;
+   const iconeRight=document.querySelector('.bx-chevrons-right')   
+   var m = 0;
         iconeRight.addEventListener('click',()=>{
+        m++
+   var trans=document.querySelectorAll('.article')
+         if (m==0) {
+            iconeLeft.style.visibility="hidden"
+         }else{iconeLeft.style.visibility="visible"}
+            
             trans[m].appendChild(spanNote)
-          m++     
+            //   m++
+              console.log(m);
+              if (m==4) {
+                iconeRight.style.visibility="hidden"
+              }
         })
+       
     const iconeLeft=document.querySelector('.bx-chevrons-left')
     iconeLeft.addEventListener('click',()=>{
-      m--
+    const trans=document.querySelectorAll('.article')
+    m--
       trans[m].appendChild(spanNote)
+      console.log(m);
+      if (m==0) {
+        iconeLeft.style.visibility="hidden"
+      }
+      if (m<4) {
+        iconeRight.style.visibility="visible"
+      }
     })
+
+    if (m<1) {
+
+        iconeLeft.style.visibility="hidden"
+    }else if(m>=1){ 
+        alert('ok')
+    }
+    
+    // var Date1= Date(0,0,0,heureDepart)
+    // var Date2= Date(0,0,0,heureFin)
    
+    // console.log(Date1) ;
+    // console.log(Date(0,0,0,heureFin));
+    // var d=new Date(0)
+    // console.log(d);
+    // if (m=1) {
+    
+    //     icone2.style.visibility="hidden"
+    // }
+    // var startDate = new Date(0, 0, 0, start[0], start[1], 0);
+    // var endDate = new Date(0, 0, 0, end[0], end[1], 0);
+    // date1 = new Date('2012/07/20 00:00:00');
 })
 
 
@@ -214,16 +293,28 @@ function reflesh(){
             })
 }
 
-function affMas(){
-    if(p==-nbr+1)
-    gEL.style.visibility="hidden"
-    else
-    gEL.style.visibility="visible"
-    if(p==0)
-    dEL.style.visibility="hidden"
-    else
-    dEL.style.visibility="visible"
-}
+
+// var trans=document.querySelectorAll('#id1')
+// var iconeRight=document.querySelector('#icone-righ')
+// console.log(iconeRight);
+// var m=0
+//      iconeRight.addEventListener('click',()=>{
+//          console.log(m++);
+//          m++
+//          trans[m].appendChild(spanNote)
+        
+//      })
+
+// function affMas(){
+//     if(p==-nbr+1)
+//     gEL.style.visibility="hidden"
+//     else
+//     gEL.style.visibility="visible"
+//     if(p==0)
+//     dEL.style.visibility="hidden"
+//     else
+//     dEL.style.visibility="visible"
+// }
 // function affMas(){
 //     if(p==-nbr+1)
 //     gEL.style.visibility="hidden"

@@ -68,7 +68,8 @@ button:hover{
     background-repeat: no-repeat;
     background-position: center;
     background-size: 50%;
-    border-radius: 5%;
+    border-bottom-left-radius: 5%;
+    border-bottom-right-radius: 5%;
     /* background-color: chocolate; */
     height: 100%;
     width: 18%;
@@ -76,22 +77,30 @@ button:hover{
     opacity: 0.6;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
-h2{
+#h-delete{
     border-bottom: 2px solid;
+    display: flex;
+}
+h2{
+    flex: 9;
+    padding: 2%;
+    background-color: green;
     text-align: center;
- 
+    
+   
 }
-.bx-message-rounded-x{
-    margin-left: 15%;
-   position: absolute;
+.bx-x{
+    flex: 1;
+   background-color: brown;
+   
 }
-.bx-message-rounded-x:hover{
+.bx-x:hover{
         color: brown;
 }
 .tache{
    position: relative;
     /* border: 2px solid firebrick; */
-   display: none;
+   /* display: none; */
  padding: auto;
  
 }
@@ -223,4 +232,75 @@ label{
 }
 .clossfleche{
     visibility: hidden;
+}
+#renommer{
+    background-color: azure;
+    padding: 3%;
+    border: 2px solid azure;
+
+}
+input{
+    padding: 1%;
+}
+
+/* confirme */
+.container-confirme{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+.affiche-sms-confirme{
+    display: block;
+}
+.content-confirme{
+    background-color: blue;
+    height: 20%;
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    margin-left: 30%;
+    margin-top: 20%;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+#sms-de-confirme{
+    
+    font-size: 170%;
+    font-weight: 900;
+    height: 20%;
+    width: 100%;
+    text-align: center;
+}
+.btn-confirme{
+    width: 100%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+a{
+    text-decoration: none;
+    color: azure;
+}
+#annuler{
+    font-size: larger;
+    font-weight: 700;
+    background-color: green;
+    padding: 2%;
+    box-shadow: 6px;
+}
+#confirmer{
+    font-size: larger;
+    font-weight: 700;
+    background-color: red;
+    padding: 2%;
 }
