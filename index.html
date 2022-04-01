@@ -8,25 +8,31 @@
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 <title>Hello, Boxicons!</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     
 </head>
 <body>
     <div class="header">
-        <div class="colonne">
-            <button id="ajout-colonne">+ Colonne</button>
-        </div>
-        <div class="note">
-            <button id="ajout-note">+ Note</button>
-        </div>
-    </div>
-    <div class="container">
+        <div class="button">
+                <div class="colonne">
+                    <button id="ajout-colonne">+ Colonne</button>
+                </div>
+                <div class="note">
+                    <button id="ajout-note">+ Note</button>
+                </div>
+         </div>
+         <div class="corbeille">
+            <i class='bx bxs-trash' id="bxs-trash"></i>
+         </div>
+     </div>
+    <div class="container" id="container">
             <!-- <div class="article">
                 <h5>colonne 1</h5>
             </div> -->
            
     </div>
     <div class="couche">
-        <div class="content">
+        <div class="content animate__bounceIn">
     
         </div>
     </div>
@@ -37,6 +43,13 @@
                 <a href="#" id="annuler">Annuler</a>
                 <a href="#" id="confirmer">Confirmer</a>
             </div>
+        </div>
+    </div>
+    <div class="container-corbeille">
+        <div class="content-corbeille">
+                <div class="corbeille">
+
+                </div>
         </div>
     </div>
     <script src="script.js"></script>

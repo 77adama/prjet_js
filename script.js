@@ -10,7 +10,7 @@ let k=0
 function ajouter(){
   
     const div=document.createElement('div')
-    div.setAttribute('class', 'article')
+    div.classList.add("article","animate__backInDown")
     div.setAttribute('id', 'id'+i)
     const divHDelete=document.createElement('div')
     divHDelete.setAttribute('id', 'h-delete')
@@ -37,23 +37,10 @@ function ajouter(){
         // span[3].style.display='none'
        div.style.backgroundColor=tab[k]
 
-       
+    
      h2.addEventListener('click', ()=>{
-         divHDelete.innerHTML='<input type="text" id="renommer">'
+         divHDelete.innerHTML="<input type='text' id='renommer' value='colonne'>"
      })
-
-// var m = 0;
-//     iconeRight.addEventListener('click',()=>{
-//       m++
-//       trans[m].appendChild(paraNote)
-//     })
-//     const iconeLeft=document.querySelector('.bx-chevrons-left')
-//     iconeLeft.addEventListener('click',()=>{
-//       m--
-//       trans[m].appendChild(paraNote)
-//     })
-
-
 
 
 // if(i>0){deletColonne.addEventListener('click', function(){
@@ -70,20 +57,46 @@ function ajouter(){
 //     reflesh()
 // })} }
 const containerConfirme =document.querySelector('.container-confirme')
-deletColonne.addEventListener('click', ()=>{
+deletColonne.addEventListener('click', (e)=>{
         containerConfirme.classList.add('affiche-sms-confirme')
+        const confirmer=document.getElementById('confirmer')
+        confirmer.addEventListener('click',(e)=>{
+        
+            
+            
+            deletColonne.parentElement.parentElement.remove(div)
+    containerConfirme.classList.remove('affiche-sms-confirme')
+    reflesh()
+    k--
+    
+        })
 })
 const annuler=document.getElementById('annuler')
 annuler.addEventListener('click',()=>{
     containerConfirme.classList.remove('affiche-sms-confirme')
 })
-const confirmer=document.getElementById('confirmer')
-const divRemove=document.querySelectorAll('#id'+i)
-const bxBXx=document.querySelectorAll('.bx bx-x')
-confirmer.addEventListener('click',()=>{
-    containerConfirme.classList.remove('affiche-sms-confirme')
- div.remove(+i+1)
-})
+
+// const confirmer=document.getElementById('confirmer')
+
+// const divRemove=document.querySelectorAll('#id'+i)
+// const bxBXx=document.querySelectorAll('.bx bx-x')
+
+
+
+// confirmer.addEventListener('click',(e)=>{
+// const bxBXx=document.querySelectorAll('.bx bx-x')
+
+    
+//     divRemove[i].remove()
+//     console.log(divRemove[i]);
+    
+//     console.log(e.target);
+//     containerConfirme.classList.remove('affiche-sms-confirme')
+//   k--
+//  reflesh()
+
+   
+// })
 
 
 // deletColonne.addEventListener('click', function(){
@@ -106,16 +119,25 @@ ajoutNnote.classList.add('ajout-note')
     console.log( ajoutNnote);
 })  
 
-
-// var i=0
-ajoutColonne.addEventListener('click', ()=>{
+    ajoutColonne.addEventListener('click', ()=>{
     
-    if(i<5){
-        ajouter()
-        k++   
-    } 
-    i++           
-     })
+        if (container.childElementCount <5) {
+            ajouter()
+            k++  
+    
+            reflesh()   
+}
+
+             
+         })
+// ajoutColonne.addEventListener('click', ()=>{
+    
+//     if(i<5){
+//         ajouter()
+//         k++   
+//     } 
+//     i++           
+//      })
 
 
 
@@ -164,6 +186,7 @@ buttonForm.innerHTML='Ajouter'
 
 form.appendChild(labelTextarea)
 form.appendChild(textarea)
+// form.appendChild(spanText)
 form.appendChild(labelDate)
 form.appendChild(inputDate)
 form.appendChild(labelStar)
@@ -184,7 +207,7 @@ const valueTimeStar=document.getElementById('time-star')
 const valueDate=document.getElementById('date')
 const valueTimeEnd=document.getElementById('time-end')
 
-buttonFormm.addEventListener('click',()=>{
+buttonFormm.addEventListener('click',(e)=>{
   
     couche.classList.remove('open')
     paraNote.classList.add('visible')
@@ -199,6 +222,12 @@ buttonFormm.addEventListener('click',()=>{
     icone2.setAttribute('id', 'icone-righ')
     var champTextarea = document.createElement('div')
     champTextarea.setAttribute('class', 'champ-textarea')
+    var deletTache=document.createElement('i')
+    deletTache.setAttribute('class','bx bx-x delet-tache') 
+    var divSurvol = document.createElement('div')
+    divSurvol.setAttribute('class','survol')
+    var divFormulaire=document.createElement('div')
+    divFormulaire.setAttribute('class','div-formulaire')
     var date = document.createElement('div')
     date.setAttribute('class', 'date')
     var heureDepart = document.createElement('div')
@@ -207,37 +236,49 @@ buttonFormm.addEventListener('click',()=>{
     heureFin.setAttribute('class', 'heure-fin')
     champTextarea.innerHTML=valueTextarea.value 
     date.innerHTML=valueDate.value
-    heureDepart.innerHTML= 'heure départ'+ valueTimeStar.value
-    heureFin.innerHTML= 'heure fin'+ valueTimeEnd.value
+    heureDepart.innerHTML= 'heure départ :'+ valueTimeStar.value
+    heureFin.innerHTML= 'heure fin :'+ valueTimeEnd.value
     // spanNote.appendChild(iconeLeft)
     notes.appendChild(champTextarea)
-    notes.appendChild(date)
-    notes.appendChild(heureDepart)
-    notes.appendChild(heureFin)
+    notes.appendChild(deletTache)
+    divSurvol.appendChild(date)
+    divSurvol.appendChild(heureDepart)
+    divSurvol.appendChild(heureFin)
+    divFormulaire.appendChild(notes)
+    divFormulaire.appendChild(divSurvol)
     spanNote.appendChild(icone2)
-    spanNote.appendChild(notes)
+    // spanNote.appendChild(notes)
+    spanNote.appendChild(divFormulaire)
    spanNote.appendChild(icone1)
     paraNote.appendChild(spanNote)
-
+   var contentCorbeille=document.querySelector('.content-corbeille')
+    deletTache.addEventListener('click',()=>{
+       contentCorbeille.appendChild(spanNote)
+    })
    const iconeRight=document.querySelector('.bx-chevrons-right')   
    var m = 0;
+   reflesh()
         iconeRight.addEventListener('click',()=>{
+            reflesh()
         m++
    var trans=document.querySelectorAll('.article')
          if (m==0) {
             iconeLeft.style.visibility="hidden"
-         }else{iconeLeft.style.visibility="visible"}
+             console.log(this.parentElement.parentElement.parentElement);
+         }else{iconeLeft.style.visibility="visible" }
             
             trans[m].appendChild(spanNote)
             //   m++
-              console.log(m);
+            //   console.log(m);
               if (m==4) {
                 iconeRight.style.visibility="hidden"
               }
         })
        
     const iconeLeft=document.querySelector('.bx-chevrons-left')
+    reflesh()
     iconeLeft.addEventListener('click',()=>{
+        reflesh()
     const trans=document.querySelectorAll('.article')
     m--
       trans[m].appendChild(spanNote)
@@ -253,24 +294,63 @@ buttonFormm.addEventListener('click',()=>{
     if (m<1) {
 
         iconeLeft.style.visibility="hidden"
-    }else if(m>=1){ 
-        alert('ok')
     }
-    
-    // var Date1= Date(0,0,0,heureDepart)
-    // var Date2= Date(0,0,0,heureFin)
+
+    var now = new Date();
+
+    var selectedDate = inputDate.valueAsNumber+now.getHours()*3600000+now.getMinutes()*60000+now.getSeconds()*1000+now.getMilliseconds()
+
+    if (selectedDate<now.getTime()) {
+        couche.classList.add('open')
+        const spanText=document.createElement('span')
+        spanText.setAttribute('class','span-text')
+        spanText.innerHTML='la date saisie est incorrect'
+        form.appendChild(spanText)
+        console.log(spanNote);
+        spanNote.innerHTML='error Date'
+        
+    }
+
+     if(valueTextarea.value.trim()==''){
+        couche.classList.add('open')
+        const spanTexAreatVide=document.createElement('span')
+        spanTexAreatVide.setAttribute('class','span-texAreat-vide')
+        spanTexAreatVide.innerHTML="Ce champ est obligatoire"
+        form.appendChild(spanTexAreatVide)
+
+    }
+    if (valueTimeStar.value>=valueTimeEnd.value) {
+        spanNote.innerHTML=''
+        couche.classList.add('open')
+        const spanErrorHeur=document.createElement('span')
+        spanErrorHeur.setAttribute('class','span-error-heur')
+        spanErrorHeur.innerHTML="l'heure de départ doit supérieur à l'heure d'arrivé'"
+        form.appendChild(spanErrorHeur)
+    }
+
+    var now = Date.parse(new Date()) 
    
-    // console.log(Date1) ;
-    // console.log(Date(0,0,0,heureFin));
-    // var d=new Date(0)
-    // console.log(d);
-    // if (m=1) {
+
+    var timeStar=Date.parse( `${inputDate.value} ${valueTimeStar.value}`) 
+    var timeEnd=Date.parse( `${inputDate.value} ${valueTimeEnd.value}`) 
+
+    var heureDebut=timeStar-now
+    var heureFin=timeEnd-now
+    setInterval(() => {
+        heureDebut-=1000
+        heureFin-=1000
+        if (heureDebut<=0) {
+            spanNote.style.backgroundColor="green"
+        }
+        if (heureFin<=0) {
+            spanNote.style.backgroundColor="blue"
+            
+        }
+    }, 1000);
+
     
-    //     icone2.style.visibility="hidden"
-    // }
-    // var startDate = new Date(0, 0, 0, start[0], start[1], 0);
-    // var endDate = new Date(0, 0, 0, end[0], end[1], 0);
-    // date1 = new Date('2012/07/20 00:00:00');
+
+    // console.log([timeStar, timeEnd,now]);
 })
 
 
@@ -292,44 +372,14 @@ function reflesh(){
                 h2.innerHTML='colonne' +(i+1)
             })
 }
+const containerCorbeille=document.querySelector('.container-corbeille')
+const btnCorbeil=document.getElementById('bxs-trash')
+const headeR=document.querySelector('.header')
+btnCorbeil.addEventListener('click',()=>{
+    headeR.classList.toggle('transit-header')
+    containerCorbeille.classList.toggle('open-container-corbeille')
+    container.classList.toggle('transit-container')
+    
+})
 
 
-// var trans=document.querySelectorAll('#id1')
-// var iconeRight=document.querySelector('#icone-righ')
-// console.log(iconeRight);
-// var m=0
-//      iconeRight.addEventListener('click',()=>{
-//          console.log(m++);
-//          m++
-//          trans[m].appendChild(spanNote)
-        
-//      })
-
-// function affMas(){
-//     if(p==-nbr+1)
-//     gEL.style.visibility="hidden"
-//     else
-//     gEL.style.visibility="visible"
-//     if(p==0)
-//     dEL.style.visibility="hidden"
-//     else
-//     dEL.style.visibility="visible"
-// }
-// function affMas(){
-//     if(p==-nbr+1)
-//     gEL.style.visibility="hidden"
-//     else
-//     gEL.style.visibility="visible"
-//     if(p==0)
-//     dEL.style.visibility="hidden"
-//     else
-//     dEL.style.visibility="visible"
-// }
-// }
-
-// function reflesh(){
-//     const listLabel=document.querySelectorAll('.repons');
-//     listLabel.forEach((label, i)=>{
-//         label.innerHTML='reponse' +(i+1)
-//     })
-//   }

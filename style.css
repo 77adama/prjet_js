@@ -15,13 +15,31 @@ body{
     justify-content: center;
     flex-direction: column;
 }
+/* .transit-header{
+    transition: all 0.5s ease;
+     right: 80px; 
+    width: calc(100% - 80px); 
+} */
 .header{
     flex: 1;
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
+    transition: all 0.5s ease;
+}
+.button{
+    border: 2px solid;
+    flex: 8;
+    display: flex;
+    align-items: center;
     flex-direction: column;
+    
+}
+.bxs-trash{
+   flex: 2;
+   margin-right: 5%;
+   font-size: 60px;
 }
 .colonne{
     flex: 1;
@@ -39,12 +57,12 @@ body{
     justify-content: center;    
 }
 button{
-    width: 100%;
+    width: 70%;
      height: 100%;
     text-align: left;
     font-size: 25px;
-    padding-left: 1%;
-
+    right: 8%;
+    position: relative;
 }
 .note{
     visibility: hidden;
@@ -76,6 +94,10 @@ button:hover{
     margin-left: 1.8%;
     opacity: 0.6;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    animation: animate__backInDown .5s ease-in-out;
+}
+.article::-webkit-scrollbar{
+    display: none;
 }
 #h-delete{
     border-bottom: 2px solid;
@@ -124,14 +146,10 @@ i{
     font-size:34px
 }
 .bx-chevrons-right{
-    flex: 0.5;
-  background-color: brown;
-   position: relative;
+   
 }
 .bx-chevrons-left{
  
-   flex: 0.5;
-  
 }
 img{
     /* position: relative;
@@ -161,7 +179,7 @@ h5{
     position: relative;
     top: 25%;
     left: 38%;
-    /* background-color: brown; */
+    background-color: green;
     /* display: none; */
     /* position: fixed; */
     /* border: 2px solid red; */
@@ -169,6 +187,7 @@ h5{
     /* background-color: beige; */
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     border-radius: 7px;
+    animation: animate__bounceIn .5s ease-in-out;
 }
 .open{
     display: block;
@@ -187,18 +206,19 @@ form{
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    
-    
+    flex-direction: column;   
 }
 textarea{
     width: 100%;
+    margin-top: 4%;
 }
 input{
     width: 100%;
+    margin-top: 4%;
 }
 label{
     width: 100%;
+    
 }
 #btn-form{
     text-align: center;
@@ -212,9 +232,39 @@ label{
     color: lightslategrey;
 }
 .notes{
-    border: 2px solid blue;
     width: 90%;
     flex: 9;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    position: relative;
+}
+.delet-tache{
+    position: relative;
+    left: 30%;
+    /* margin-left: 50%; */
+    font-size: 15px;
+    flex: 0.5;
+}
+.survol{
+    background-color: lightslategray;
+    overflow: auto;
+    visibility: hidden;
+    position: relative;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* padding: 1rem; */
+    max-height: 100%;
+    transform:translateY(100%);
+}
+.div-formulaire{
+    border: 2px solid;
+}
+.div-formulaire:hover .survol{
+    transform:translateY(0);
+    visibility: visible;
 }
 .date{
    
@@ -241,6 +291,32 @@ label{
 }
 input{
     padding: 1%;
+}
+#id{
+    background-color: darkgoldenrod;
+    display: flex;
+    
+}
+.span-text{
+    position: absolute;
+    bottom: 40%;
+    color: red;
+    font-size: larger;
+    font-weight: 600;
+}
+.span-error-heur{
+    position: absolute;
+    bottom: 26%;
+    color: red;
+    font-size: 100%;
+    font-weight: 600;
+}
+.span-texAreat-vide{
+    position: absolute;
+    bottom: 85%;
+    color: red;
+    font-size: 100%;
+    font-weight: 600;
 }
 
 /* confirme */
@@ -303,4 +379,57 @@ a{
     font-weight: 700;
     background-color: red;
     padding: 2%;
+}
+/* container-corbeille */
+/* .side-bar.close ~ .menue-section{
+    left: 80px; 
+     transition: all 0.5s ease; 
+    left: 80px;
+    
+        width: calc(100% - 80px);
+    
+    } */
+  
+/* .container-corbeille.open-container-corbeille ~ .container{
+        right: 20%;
+        transition: all 0.5s ease;
+        transform: translateX(20%);
+        width: calc(100% - 20%);
+        display: block;
+    } */
+.transit-container{
+    /* transform: translateX(-20%);
+    transition: all 0.5s ease; */
+}
+.container-corbeille{
+    position: fixed;
+    height: 80%;
+    width: 20%;
+    right: 0;
+    bottom: 10%;
+   border: 2px solid green;
+    background-color: brown;
+    /* transition: all 0.5s ease;  */
+    /* left: 80px;  */
+ /* transition: all 0.5s ease;  */
+/* left: 80px; */
+    /* width: calc(100% - 80px); */
+    /* display: none; */
+    transform: translateX(100%);
+    transition: all 0.5s ease;
+    /* display: flex;
+    justify-content: end; */
+}
+.content-corbeille{
+    position: relative;
+    border: 2px solid;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+}
+.open-container-corbeille{
+    /* display: block; */
+    transform: translateX(0%);
+    transition: all 0.5s ease;
 }
