@@ -15,11 +15,6 @@ body{
     justify-content: center;
     flex-direction: column;
 }
-/* .transit-header{
-    transition: all 0.5s ease;
-     right: 80px; 
-    width: calc(100% - 80px); 
-} */
 .header{
     flex: 1;
     width: 100%;
@@ -29,7 +24,6 @@ body{
     transition: all 0.5s ease;
 }
 .button{
-    border: 2px solid;
     flex: 8;
     display: flex;
     align-items: center;
@@ -38,8 +32,9 @@ body{
 }
 .bxs-trash{
    flex: 2;
-   margin-right: 5%;
+   right: 5%;
    font-size: 60px;
+   color: blue;
 }
 .colonne{
     flex: 1;
@@ -113,7 +108,7 @@ h2{
 }
 .bx-x{
     flex: 1;
-   background-color: brown;
+   /* background-color: brown; */
    
 }
 .bx-x:hover{
@@ -121,10 +116,8 @@ h2{
 }
 .tache{
    position: relative;
-    /* border: 2px solid firebrick; */
-   /* display: none; */
  padding: auto;
- 
+ display: flex;
 }
 h4{
     margin: 2%;
@@ -152,11 +145,6 @@ i{
  
 }
 img{
-    /* position: relative;
-    top: 40%;
-    left: 34%;
-    height: 15%;
-    width: 35%; */
     border-radius: 50%;
 }
 h5{
@@ -181,10 +169,7 @@ h5{
     left: 38%;
     background-color: green;
     /* display: none; */
-    /* position: fixed; */
-    /* border: 2px solid red; */
     width: 25%;
-    /* background-color: beige; */
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     border-radius: 7px;
     animation: animate__bounceIn .5s ease-in-out;
@@ -193,12 +178,16 @@ h5{
     display: block;
 }
 .titre{
+    position: relative;
     margin-left: 7%;
-
+    bottom: 5%;
+    color: white;
+    display: flex;
+    align-items: center;
 }
 small{
     margin-left: 7%;
-
+    color: white;
 }
 form{
     width: 85%;
@@ -218,7 +207,7 @@ input{
 }
 label{
     width: 100%;
-    
+    color: white;
 }
 #btn-form{
     text-align: center;
@@ -239,12 +228,14 @@ label{
     justify-content: flex-end;
     width: 100%;
     position: relative;
+    
 }
 .delet-tache{
     position: relative;
-    left: 30%;
+    left: 47%;
+    bottom: 5%;
     /* margin-left: 50%; */
-    font-size: 15px;
+    font-size: 35px;
     flex: 0.5;
 }
 .survol{
@@ -260,11 +251,20 @@ label{
     transform:translateY(100%);
 }
 .div-formulaire{
-    border: 2px solid;
+   
 }
 .div-formulaire:hover .survol{
     transform:translateY(0);
     visibility: visible;
+}
+#delet-modal{
+    /* font-size: 100px; */
+    margin-left: 47%;
+    background-color: green;
+}
+.champ-textarea{
+   
+    
 }
 .date{
    
@@ -380,28 +380,14 @@ a{
     background-color: red;
     padding: 2%;
 }
-/* container-corbeille */
-/* .side-bar.close ~ .menue-section{
-    left: 80px; 
-     transition: all 0.5s ease; 
-    left: 80px;
-    
-        width: calc(100% - 80px);
-    
-    } */
-  
-/* .container-corbeille.open-container-corbeille ~ .container{
-        right: 20%;
-        transition: all 0.5s ease;
-        transform: translateX(20%);
-        width: calc(100% - 20%);
-        display: block;
-    } */
+
 .transit-container{
     /* transform: translateX(-20%);
     transition: all 0.5s ease; */
 }
+                                /* corbeille */
 .container-corbeille{
+    z-index: 2;
     position: fixed;
     height: 80%;
     width: 20%;
@@ -409,16 +395,11 @@ a{
     bottom: 10%;
    border: 2px solid green;
     background-color: brown;
-    /* transition: all 0.5s ease;  */
-    /* left: 80px;  */
- /* transition: all 0.5s ease;  */
-/* left: 80px; */
-    /* width: calc(100% - 80px); */
     /* display: none; */
     transform: translateX(100%);
     transition: all 0.5s ease;
-    /* display: flex;
-    justify-content: end; */
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    border-radius: 2%;
 }
 .content-corbeille{
     position: relative;
@@ -432,4 +413,30 @@ a{
     /* display: block; */
     transform: translateX(0%);
     transition: all 0.5s ease;
+}
+.index-corbeille::after {
+    content: '';
+    background-color: rgba(0, 0, 0, 0.445);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: none;
+}
+.open-index-corbeille{
+    display: block;
+    content: '';
+    background-color: rgba(0, 0, 0, 0.445);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+.open-bxs-trash{
+    z-index: 2;
+    position: absolute;
+    top: 1.29%;
+    right: 0.28%;
 }

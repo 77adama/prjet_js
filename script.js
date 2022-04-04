@@ -3,6 +3,17 @@ const ajoutColonne=document.getElementById('ajout-colonne')
 const ajoutNnote=document.getElementById('ajout-note')
 const content =document.querySelector('.content')
 const couche=document.querySelector('.couche')
+
+
+
+const api= 'localhost:8000?controller=tache&action=tache'
+// fetch()
+// .then(function (donne) {
+//     json=donne.json()
+//     return json
+
+
+
 var m=0
 var i=0
 var tab=['#406cc3','#2cb860','#daa520','#adff2f','#ff2a8a']
@@ -57,6 +68,7 @@ function ajouter(){
 //     reflesh()
 // })} }
 const containerConfirme =document.querySelector('.container-confirme')
+if(i>0){ 
 deletColonne.addEventListener('click', (e)=>{
         containerConfirme.classList.add('affiche-sms-confirme')
         const confirmer=document.getElementById('confirmer')
@@ -71,6 +83,10 @@ deletColonne.addEventListener('click', (e)=>{
     
         })
 })
+}else{
+    
+}
+
 const annuler=document.getElementById('annuler')
 annuler.addEventListener('click',()=>{
     containerConfirme.classList.remove('affiche-sms-confirme')
@@ -112,11 +128,9 @@ annuler.addEventListener('click',()=>{
     
 }
 
-
 ajoutColonne.addEventListener('click', ()=>{
 ajoutNnote.classList.add('ajout-note')
 
-    console.log( ajoutNnote);
 })  
 
     ajoutColonne.addEventListener('click', ()=>{
@@ -127,7 +141,7 @@ ajoutNnote.classList.add('ajout-note')
     
             reflesh()   
 }
-
+i++
              
          })
 // ajoutColonne.addEventListener('click', ()=>{
@@ -148,6 +162,9 @@ ajoutNnote.addEventListener('click',()=>{
     const divTitre=document.createElement('div')
     divTitre.setAttribute('class', 'titre')
     divTitre.innerHTML='NOUVELLE TACHE'
+    const deletModal=document.createElement('i')
+    deletModal.setAttribute('class','bx bx-x') 
+    deletModal.setAttribute('id','delet-modal')
     const small=document.createElement('small')
     small.innerHTML='remplir les informations de la nouvelle tache'
 const form=document.createElement('form')
@@ -195,9 +212,17 @@ form.appendChild(labelEnd)
 form.appendChild(inputEnd)
 form.appendChild(buttonForm)
 
+divTitre.appendChild(deletModal)
 content.appendChild(divTitre)
 content.appendChild(small)
 content.appendChild(form)
+
+deletModal.addEventListener('click',()=>{
+    
+    couche.classList.remove('open')
+
+    
+})
 // const iconeLeft=document.querySelector('.bx-chevrons-left')
 const spanNote=document.querySelector('h4')
 const paraNote=document.querySelector('.tache')
@@ -251,9 +276,38 @@ buttonFormm.addEventListener('click',(e)=>{
     spanNote.appendChild(divFormulaire)
    spanNote.appendChild(icone1)
     paraNote.appendChild(spanNote)
+
+const ajoutColonne=document.getElementById('ajout-colonne')
+    ajoutColonne.addEventListener('click', ()=>{
+        if ((m==3&container.childElementCount==5)|| (m==2&container.childElementCount==4)||(m==1&container.childElementCount==3)||(m==0&container.childElementCount==2)) {
+            iconeRight.style.visibility="visible"
+            console.log(m);
+            console.log(container.childElementCount);
+          }
+        //   if (m==2&container.childElementCount==4) {
+        //     iconeRight.style.visibility="visible"
+        //   }
+        })  
+        const confirmer=document.getElementById('confirmer')
+        confirmer.addEventListener('click',(e)=>{
+            if ((m==3&container.childElementCount==5)||(m==2&container.childElementCount==4)||(m==1&container.childElementCount==3)||(m==0&container.childElementCount==3)||(m==0&container.childElementCount==2)) {
+                iconeRight.style.visibility="hidden"
+                
+            }
+            console.log(m);
+            console.log(container.childElementCount);
+        })
+
+
    var contentCorbeille=document.querySelector('.content-corbeille')
     deletTache.addEventListener('click',()=>{
        contentCorbeille.appendChild(spanNote)
+       if (contentCorbeille.appendChild(spanNote)) {
+           champTextarea.addEventListener('click',()=>{
+   var trans=document.querySelectorAll('.article')
+               trans[m].appendChild(spanNote);
+           })
+       }
     })
    const iconeRight=document.querySelector('.bx-chevrons-right')   
    var m = 0;
@@ -264,7 +318,6 @@ buttonFormm.addEventListener('click',(e)=>{
    var trans=document.querySelectorAll('.article')
          if (m==0) {
             iconeLeft.style.visibility="hidden"
-             console.log(this.parentElement.parentElement.parentElement);
          }else{iconeLeft.style.visibility="visible" }
             
             trans[m].appendChild(spanNote)
@@ -273,16 +326,20 @@ buttonFormm.addEventListener('click',(e)=>{
               if (m==4) {
                 iconeRight.style.visibility="hidden"
               }
+              if ((m==3&container.childElementCount==4)|| (m==2&container.childElementCount==3)||(m==1&container.childElementCount==2)) {
+                iconeRight.style.visibility="hidden"
+              }
+   var trans=document.querySelectorAll('.article')
         })
        
     const iconeLeft=document.querySelector('.bx-chevrons-left')
     reflesh()
     iconeLeft.addEventListener('click',()=>{
         reflesh()
-    const trans=document.querySelectorAll('.article')
+    //    if(container.firstElementChild)
+    var trans=document.querySelectorAll('.article')
     m--
       trans[m].appendChild(spanNote)
-      console.log(m);
       if (m==0) {
         iconeLeft.style.visibility="hidden"
       }
@@ -311,7 +368,8 @@ buttonFormm.addEventListener('click',(e)=>{
         
     }
 
-     if(valueTextarea.value.trim()==''){
+     if(valueTextarea.value==''){
+        spanNote.innerHTML=''
         couche.classList.add('open')
         const spanTexAreatVide=document.createElement('span')
         spanTexAreatVide.setAttribute('class','span-texAreat-vide')
@@ -336,11 +394,15 @@ buttonFormm.addEventListener('click',(e)=>{
 
     var heureDebut=timeStar-now
     var heureFin=timeEnd-now
+    const deletColonne=document.querySelector('.bx bx-x')
     setInterval(() => {
         heureDebut-=1000
         heureFin-=1000
         if (heureDebut<=0) {
             spanNote.style.backgroundColor="green"
+            iconeRight.style.display="none"
+            iconeLeft.style.display="none"
+         
         }
         if (heureFin<=0) {
             spanNote.style.backgroundColor="blue"
@@ -374,8 +436,11 @@ function reflesh(){
 }
 const containerCorbeille=document.querySelector('.container-corbeille')
 const btnCorbeil=document.getElementById('bxs-trash')
+const indexCorbeille=document.querySelector('.index-corbeille')
 const headeR=document.querySelector('.header')
 btnCorbeil.addEventListener('click',()=>{
+    indexCorbeille.classList.toggle('open-index-corbeille')
+    btnCorbeil.classList.toggle('open-bxs-trash')
     headeR.classList.toggle('transit-header')
     containerCorbeille.classList.toggle('open-container-corbeille')
     container.classList.toggle('transit-container')
