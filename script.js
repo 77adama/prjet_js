@@ -23,12 +23,15 @@ function ajouter(){
     const div=document.createElement('div')
     div.classList.add("article","animate__backInDown")
     div.setAttribute('id', 'id'+i)
+    const divHDelet=document.createElement('div')
+    divHDelet.setAttribute('id', 'h-delet')
     const divHDelete=document.createElement('div')
     divHDelete.setAttribute('id', 'h-delete')
     const h2=document.createElement('h2')
     h2.innerHTML='colonne '+(k+1)
     const deletColonne=document.createElement('i')
     deletColonne.setAttribute('class','bx bx-x') 
+    deletColonne.setAttribute('id', 'bx')
     const para=document.createElement('div')
     para.setAttribute('class','tache')
     const span=document.createElement('h4')
@@ -39,7 +42,8 @@ function ajouter(){
     // para.appendChild(icone1)
     para.appendChild(span)
     // para.appendChild(icone2)
-    divHDelete.appendChild(h2)
+    divHDelet.appendChild(h2)
+    divHDelete.appendChild(divHDelet)
    divHDelete.appendChild(deletColonne)    
     div.appendChild(divHDelete)
     div.appendChild(para)
@@ -50,7 +54,7 @@ function ajouter(){
 
     
      h2.addEventListener('click', ()=>{
-         divHDelete.innerHTML="<input type='text' id='renommer' value='colonne'>"
+         divHDelet.innerHTML="<input type='text' id='renommer' value='colonne'>"
      })
 
 
@@ -72,21 +76,35 @@ if(i>0){
 deletColonne.addEventListener('click', (e)=>{
         containerConfirme.classList.add('affiche-sms-confirme')
         const confirmer=document.getElementById('confirmer')
-        confirmer.addEventListener('click',(e)=>{
-        
-            
-            
+        confirmer.addEventListener('click',()=>{
+            i--
             deletColonne.parentElement.parentElement.remove(div)
     containerConfirme.classList.remove('affiche-sms-confirme')
     reflesh()
-    k--
-    
+   
+    i=0
         })
 })
-}else{
-    
 }
-
+    deletColonne.addEventListener('click',()=>{
+if(container.childElementCount==1){
+    deletColonne.addEventListener('click', ()=>{
+    k--
+        containerConfirme.classList.add('affiche-sms-confirme')
+        const confirmer=document.getElementById('confirmer')
+        confirmer.addEventListener('click',()=>{
+           
+            deletColonne.parentElement.parentElement.remove(div)
+    containerConfirme.classList.remove('affiche-sms-confirme')
+    reflesh()
+            ajoutNnote.classList.add('disabled')
+        })
+})
+}
+ajoutColonne.addEventListener('click',()=>{
+    ajoutNnote.classList.remove('disabled')
+})
+})
 const annuler=document.getElementById('annuler')
 annuler.addEventListener('click',()=>{
     containerConfirme.classList.remove('affiche-sms-confirme')
@@ -128,9 +146,14 @@ annuler.addEventListener('click',()=>{
     
 }
 
+const btnColonne=document.getElementById('btn-colonne')
+btnColonne.addEventListener('click',()=>{
+    ajoutColonne.classList.add('open-ajout-colonne')
+})
+
 ajoutColonne.addEventListener('click', ()=>{
 ajoutNnote.classList.add('ajout-note')
-
+    
 })  
 
     ajoutColonne.addEventListener('click', ()=>{
@@ -154,10 +177,10 @@ i++
 //      })
 
 
-
+const indexModal=document.querySelector('.index-modal')
 let j=0
 ajoutNnote.addEventListener('click',()=>{
-   
+   indexModal.classList.toggle('open-index-modal')
     if(j<1){
     const divTitre=document.createElement('div')
     divTitre.setAttribute('class', 'titre')
@@ -218,10 +241,8 @@ content.appendChild(small)
 content.appendChild(form)
 
 deletModal.addEventListener('click',()=>{
-    
-    couche.classList.remove('open')
-
-    
+    indexModal.classList.remove('open-index-modal')
+    couche.classList.remove('open')   
 })
 // const iconeLeft=document.querySelector('.bx-chevrons-left')
 const spanNote=document.querySelector('h4')
@@ -233,7 +254,7 @@ const valueDate=document.getElementById('date')
 const valueTimeEnd=document.getElementById('time-end')
 
 buttonFormm.addEventListener('click',(e)=>{
-  
+  indexModal.classList.remove('open-index-modal')
     couche.classList.remove('open')
     paraNote.classList.add('visible')
     const spanNote=document.createElement('h4')
@@ -281,8 +302,7 @@ const ajoutColonne=document.getElementById('ajout-colonne')
     ajoutColonne.addEventListener('click', ()=>{
         if ((m==3&container.childElementCount==5)|| (m==2&container.childElementCount==4)||(m==1&container.childElementCount==3)||(m==0&container.childElementCount==2)) {
             iconeRight.style.visibility="visible"
-            console.log(m);
-            console.log(container.childElementCount);
+       
           }
         //   if (m==2&container.childElementCount==4) {
         //     iconeRight.style.visibility="visible"
@@ -294,18 +314,28 @@ const ajoutColonne=document.getElementById('ajout-colonne')
                 iconeRight.style.visibility="hidden"
                 
             }
-            console.log(m);
-            console.log(container.childElementCount);
+          
         })
 
 
    var contentCorbeille=document.querySelector('.content-corbeille')
     deletTache.addEventListener('click',()=>{
        contentCorbeille.appendChild(spanNote)
+       iconeRight.style.visibility="hidden"
+       iconeLeft.style.visibility="hidden"
+       const divRestaurer=document.createElement('div')
+       divRestaurer.setAttribute('id', 'div-restaurer')
+       divRestaurer.innerHTML="restaurer"
+       deletTache.style.display="none"
+       notes.appendChild(divRestaurer)
        if (contentCorbeille.appendChild(spanNote)) {
-           champTextarea.addEventListener('click',()=>{
+           divRestaurer.addEventListener('click',()=>{
    var trans=document.querySelectorAll('.article')
                trans[m].appendChild(spanNote);
+               deletTache.style.display="block"
+               iconeRight.style.visibility="visible"
+                 iconeLeft.style.visibility="visible"
+                 divRestaurer.style.display="none"
            })
        }
     })
@@ -352,23 +382,23 @@ const ajoutColonne=document.getElementById('ajout-colonne')
 
         iconeLeft.style.visibility="hidden"
     }
-
     var now = new Date();
 
     var selectedDate = inputDate.valueAsNumber+now.getHours()*3600000+now.getMinutes()*60000+now.getSeconds()*1000+now.getMilliseconds()
 
-    if (selectedDate<now.getTime()) {
+    if ((selectedDate<now.getTime())||(!selectedDate)) {
+  indexModal.classList.add('open-index-modal')
         couche.classList.add('open')
         const spanText=document.createElement('span')
         spanText.setAttribute('class','span-text')
         spanText.innerHTML='la date saisie est incorrect'
         form.appendChild(spanText)
-        console.log(spanNote);
-        spanNote.innerHTML='error Date'
+        spanNote.innerHTML=''
         
     }
 
-     if(valueTextarea.value==''){
+     if(!valueTextarea.value){
+  indexModal.classList.add('open-index-modal')
         spanNote.innerHTML=''
         couche.classList.add('open')
         const spanTexAreatVide=document.createElement('span')
@@ -378,6 +408,7 @@ const ajoutColonne=document.getElementById('ajout-colonne')
 
     }
     if (valueTimeStar.value>=valueTimeEnd.value) {
+  indexModal.classList.add('open-index-modal')
         spanNote.innerHTML=''
         couche.classList.add('open')
         const spanErrorHeur=document.createElement('span')
@@ -402,11 +433,16 @@ const ajoutColonne=document.getElementById('ajout-colonne')
             spanNote.style.backgroundColor="green"
             iconeRight.style.display="none"
             iconeLeft.style.display="none"
-         
+            deletTache.style.display="none"
         }
         if (heureFin<=0) {
             spanNote.style.backgroundColor="blue"
-            
+        const deletColonne=document.querySelectorAll('.bx bx-x')
+const containerConfirme =document.querySelector('.container-confirme')
+            deletColonne.addEventListener('click', ()=>{
+                // containerConfirme.classList.remove('affiche-sms-confirme')
+             
+            })
         }
     }, 1000);
 
@@ -428,6 +464,7 @@ const closse=document.querySelector('.titre')
      
 
 })
+
 function reflesh(){
     const refleshColonne=document.querySelectorAll('h2');
             refleshColonne.forEach((h2, i)=>{
